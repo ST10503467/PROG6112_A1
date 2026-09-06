@@ -4,16 +4,16 @@ import java.util.Scanner;
 
 public class A1 {
 
-    public class Patient {
+    // public class Patient {
 
-        private String patientID;
-        private String patientName;
-        private int patientAge;
-        private String patientGender;
-        private String patientCondition;
-        private String patientCategory;
+        // private String patientID;
+        // private String patientName;
+        // private int patientAge;
+        // private String patientGender;
+        // private String patientCondition;
+        // private String patientCategory;
 
-    }
+    // }
 
     public static void main() {
         Scanner scanner = new Scanner(System.in);
@@ -65,6 +65,7 @@ public class A1 {
                     break;
                 case "2":
                     System.out.println("Enter patient ID: ");
+                    break;
             }
         }
     }
