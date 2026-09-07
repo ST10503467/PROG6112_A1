@@ -1,6 +1,7 @@
 package com.mycompany.a1;
 
 import java.util.Scanner;
+import java.util.Collection;
 
 public class A1 {
 
@@ -20,7 +21,11 @@ public class A1 {
             System.out.println("6. Display ward layout.");
             System.out.println("7. Display available beds.");
             System.out.println("8. Display occupied beds.");
-            System.out.println("9. Exit");
+            System.out.println("9. Display all registered patients.");
+            System.out.println("10. Display total registered patients.");
+            System.out.println("11. Display total occupied beds.");
+            System.out.println("12. Display ward occupancy %.");
+            System.out.println("13. Exit");
             System.out.print("Choose an option: ");
 
             String choice = scanner.nextLine();
@@ -173,34 +178,19 @@ public class A1 {
                         }
                     }
                     break;
-
                 case "10":
-                    System.out.println("\n--- Available Beds ---");
-                    for (Bed bed : bedManager.getAvailableBeds()) {
-                        System.out.println(bed.getBedId());
-                    }
-                    break;
-
-                case "11":
-                    System.out.println("\n--- Occupied Beds ---");
-                    for (Bed bed : bedManager.getOccupiedBeds()) {
-                        System.out.println(bed);
-                    }
-                    break;
-
-                case "12":
                     System.out.println("Total registered patients: " + manager.getAllPatients().size());
                     break;
 
-                case "13":
+                case "11":
                     System.out.println("Total occupied beds: " + bedManager.getOccupiedBeds().size());
                     break;
 
-                case "14":
+                case "12":
                     System.out.printf("Ward occupancy: %.1f%%%n", bedManager.getOccupancyPercentage());
                     break;
 
-                case "15":
+                case "13":
                     running = false;
                     System.out.println("Goodbye!");
                     break;

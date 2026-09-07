@@ -106,4 +106,22 @@ public class BedManager {
     public double getOccupancyPercentage() {
         return (getOccupiedBeds().size() * 100.0) / getTotalBeds();
     }
+
+    public boolean allocateSpecificBed(String bedId, Patient patient) {
+        if (patient.getCategory() != Category.INPATIENT) {
+            System.out.println("Only inpatients may be allocated a bed.");
+            return false;
+        }
+        Bed bed = findBed(bedId);
+        if (bed == null) {
+            System.out.println("No such bed exists.");
+            return false;
+        }
+        if (bed.isOccupied()) {
+            System.out.println("That bed is already occupied.");
+            return false;
+        }
+        bed.occupy(patient.getId());
+        return true;
+    }
 }
