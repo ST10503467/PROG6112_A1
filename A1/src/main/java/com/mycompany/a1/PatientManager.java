@@ -18,4 +18,8 @@ public class PatientManager {
     public Patient findPatient(String id) {
         return patients.get(id); // returns null if not found
     }
+
+    public boolean updatePatient(String id) {
+        return patients.containsKey(id);
+    }
 }

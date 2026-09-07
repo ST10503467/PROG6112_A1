@@ -13,7 +13,8 @@ public class A1 {
             System.out.println("\n--- Hospital Patient System ---");
             System.out.println("1. Add new patient");
             System.out.println("2. Search patient by ID");
-            System.out.println("3. Exit");
+            System.out.println("3. Update patient details.");
+            System.out.println("4. Exit");
             System.out.print("Choose an option: ");
 
             String choice = scanner.nextLine();
@@ -62,6 +63,61 @@ public class A1 {
                     break;
 
                 case "3":
+                    System.out.print("Enter patient ID to update: ");
+                    String updateId = scanner.nextLine();
+                    Patient toUpdate = manager.findPatient(updateId);
+
+                    if (toUpdate == null) {
+                        System.out.println("No patient found with that ID.");
+                        break;
+                    }
+
+                    System.out.println("Leave a field blank to keep its current value.");
+
+                    System.out.print("New name [" + toUpdate.getName() + "]: ");
+                    String newName = scanner.nextLine();
+                    if (!newName.isBlank()) {
+                        toUpdate.setName(newName);
+                    }
+
+                    System.out.print("New age [" + toUpdate.getAge() + "]: ");
+                    String newAgeInput = scanner.nextLine();
+                    if (!newAgeInput.isBlank()) {
+                        toUpdate.setAge(Integer.parseInt(newAgeInput));
+                    }
+
+                    System.out.print("New gender [" + toUpdate.getGender() + "]: ");
+                    String newGender = scanner.nextLine();
+                    if (!newGender.isBlank()) {
+                        toUpdate.setGender(newGender);
+                    }
+
+                    Category newCategory = null;
+                    while (newCategory == null) {
+                        System.out.print("New category [" + toUpdate.getCategory() + "] (Inpatient, Outpatient, Emergency, or blank to keep): ");
+                        String newCategoryInput = scanner.nextLine().trim().toUpperCase();
+                        if (newCategoryInput.isBlank()) {
+                            newCategory = toUpdate.getCategory(); // keep existing
+                        } else {
+                            try {
+                                newCategory = Category.valueOf(newCategoryInput);
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("Invalid category. Please enter Inpatient, Outpatient, Emergency, or leave blank.");
+                            }
+                        }
+                    }
+                    toUpdate.setCategory(newCategory);
+
+                    System.out.print("New condition [" + toUpdate.getCondition() + "]: ");
+                    String newCondition = scanner.nextLine();
+                    if (!newCondition.isBlank()) {
+                        toUpdate.setCondition(newCondition);
+                    }
+
+                    System.out.println("Patient updated successfully.");
+                    break;
+
+                case "4":
                     running = false;
                     System.out.println("Goodbye!");
                     break;

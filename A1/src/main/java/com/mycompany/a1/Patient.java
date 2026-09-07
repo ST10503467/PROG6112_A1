@@ -9,6 +9,17 @@ public class Patient {
     private Category category;   // changed from String
     private String condition;
 
+    public void setName(String name) {
+        this.name = name;}
+    public void setAge(int age) {
+        this.age = age;}
+    public void setGender(String gender) {
+        this.gender = gender;}
+    public void setCategory(Category category) {
+        this.category = category;}
+    public void setCondition(String condition) {
+        this.condition = condition;}
+
     public Patient(String id, String name, int age, String gender, Category category, String condition) {
         this.id = id;
         this.name = name;
