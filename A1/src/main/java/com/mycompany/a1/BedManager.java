@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BedManager {
+
     private static final int ROWS = 4;
     private static final int COLS = 5;
     private Bed[] beds;
@@ -45,7 +46,7 @@ public class BedManager {
         bed.release();
         return true;
     }
-    
+
     public String releaseBedByPatientId(String patientId) {
         for (Bed bed : beds) {
             if (bed.isOccupied() && bed.getPatientId().equals(patientId)) {
@@ -96,5 +97,13 @@ public class BedManager {
             }
         }
         return occupied;
+    }
+
+    public int getTotalBeds() {
+        return beds.length;
+    }
+
+    public double getOccupancyPercentage() {
+        return (getOccupiedBeds().size() * 100.0) / getTotalBeds();
     }
 }

@@ -1,6 +1,7 @@
 package com.mycompany.a1;
 
 import java.util.HashMap;
+import java.util.Collection;
 
 public class PatientManager {
 
@@ -21,5 +22,9 @@ public class PatientManager {
 
     public boolean updatePatient(String id) {
         return patients.containsKey(id);
+    }
+
+    public Collection<Patient> getAllPatients() {
+        return patients.values();
     }
 }
