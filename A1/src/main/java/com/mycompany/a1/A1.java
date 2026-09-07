@@ -7,6 +7,7 @@ public class A1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         PatientManager manager = new PatientManager();
+        BedManager bedManager = new BedManager();
         boolean running = true;
 
         while (running) {
