@@ -4,69 +4,73 @@ import java.util.Scanner;
 
 public class A1 {
 
-    // public class Patient {
-
-        // private String patientID;
-        // private String patientName;
-        // private int patientAge;
-        // private String patientGender;
-        // private String patientCondition;
-        // private String patientCategory;
-
-    // }
-
-    public static void main() {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        PatientManager manager = new PatientManager();
         boolean running = true;
+
         while (running) {
+            System.out.println("\n--- Hospital Patient System ---");
+            System.out.println("1. Add new patient");
+            System.out.println("2. Search patient by ID");
+            System.out.println("3. Exit");
+            System.out.print("Choose an option: ");
 
-            System.out.println("\n Main Menu");
-            System.out.println("1. Register a patient.");
-            System.out.println("2. Search for a patient.");
-            System.out.println("3. Update patient details.");
-            System.out.println("4. Delete a patient.");
-            System.out.println("5. Display all patients.");
+            String choice = scanner.nextLine();
 
-            String input = scanner.nextLine();
-
-            switch (input) {
+            switch (choice) {
                 case "1":
-                    System.out.print("Enter patient ID: ");
-                    String patientID = scanner.nextLine();
-                    System.out.println("Patient ID registered.");
+                    System.out.print("Enter ID: ");
+                    String id = scanner.nextLine();
 
-                    System.out.print("Enter patient name: ");
-                    String patientName = scanner.nextLine();
-                    System.out.println("Patient name registered.");
+                    System.out.print("Enter name: ");
+                    String name = scanner.nextLine();
 
-                    System.out.print("Enter patient age: ");
-                    String patientAge = scanner.nextLine();
-                    int patientAgeInt = Integer.parseInt(patientAge);           // This must be parse'd into an integer.
-                    System.out.println("Patient age registered.");
+                    System.out.print("Enter age: ");
+                    int age = Integer.parseInt(scanner.nextLine());
 
-                    System.out.print("Enter patient gender: ");
-                    String patientGender = scanner.nextLine();
-                    System.out.println("Patient gender registered.");
+                    System.out.print("Enter gender: ");
+                    String gender = scanner.nextLine();
 
-                    System.out.print("Enter patient condition: ");
-                    String patientCondition = scanner.nextLine();
-                    System.out.println("Patient condition registered.");
+                    Category category = null;
+                    while (category == null) {
+                        System.out.print("Enter category (Inpatient, Outpatient, Emergency): ");
+                        String categoryInput = scanner.nextLine().trim().toUpperCase();
+                        try {
+                            category = Category.valueOf(categoryInput);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid category. Please enter Inpatient, Outpatient, or Emergency.");
+                        }
+                    }
 
-                    System.out.print("Enter patient category (Inpatient, Outpatient, or Emergency): ");
-                    String patientCategory = scanner.nextLine();
-                    System.out.println("Patient category registered.");
+                    System.out.print("Enter condition: ");
+                    String condition = scanner.nextLine();
 
-                    System.out.println("Patient ID: " + patientID);
-                    System.out.println("Patient name: " + patientName);
-                    System.out.println("Patient age: " + patientAgeInt);
-                    System.out.println("Patient gender: " + patientGender);
-                    System.out.println("Patient condition: " + patientCondition);
-                    System.out.println("Patient category: " + patientCategory);
+                    manager.addPatient(new Patient(id, name, age, gender, category, condition));
                     break;
+
                 case "2":
-                    System.out.println("Enter patient ID: ");
+                    System.out.print("Enter patient ID to search: ");
+                    String searchId = scanner.nextLine();
+                    Patient found = manager.findPatient(searchId);
+
+                    if (found != null) {
+                        System.out.println("\n" + found);
+                    } else {
+                        System.out.println("No patient found with that ID.");
+                    }
                     break;
+
+                case "3":
+                    running = false;
+                    System.out.println("Goodbye!");
+                    break;
+
+                default:
+                    System.out.println("Invalid option, try again.");
             }
         }
+
+        scanner.close();
     }
 }
